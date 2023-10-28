@@ -30,3 +30,7 @@ class ConnectionToAiDevs:
     def sendresult(self, answer):
         sendResult = requests.post(self.urlAnswer, json=answer)
         print(sendResult.text)
+
+    def sendresultasjson(self, text):
+        answer = {'answer': text}
+        self.sendresult(answer)
