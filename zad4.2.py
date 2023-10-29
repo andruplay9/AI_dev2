@@ -21,11 +21,16 @@ connector=aidevmethods.ConnectionToAiDevs(NotToCommit.apikey, 'blogger')
 print(connector.question)
 
 
-
 human_template = "{text}"
 
+systemPromptzad4Sub2 = """You are a bloger who writhe in polish
+your job is writhe about making a Margherity pizza
+for you work you get table of titles for each chapter that you blog will had
+you cant add any more titles to work than provided
+write max five sentence per chapter
+ each chapter start with word 'Chapter' and chapter number"""
 chat_prompt = ChatPromptTemplate.from_messages([
-            ("system",NotToCommit.systemPromptzad4Sub2),
+            ("system",systemPromptzad4Sub2),
             ("human"," , ".join(connector.question['blog'])),
         ])
 print(chat_prompt)
