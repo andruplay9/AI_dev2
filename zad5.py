@@ -20,7 +20,7 @@ class CommaSeparatedListOutputParser(BaseOutputParser):
 connector=aidevmethods.ConnectionToAiDevs(NotToCommit.apikey, 'liar')
 print(connector.question)
 qustiontable=['What is capital of Poland?','What is capital of Hungary?','What is capital of USA?','What is capital of France?']
-qustion=qustiontable[random.randint(0,len(qustiontable)-1)]
+qustion=random.choice(qustiontable)
 tocheck= connector.sendQuestion(qustion)
 
 humanjson={
