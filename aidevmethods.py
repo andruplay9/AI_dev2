@@ -26,6 +26,9 @@ class ConnectionToAiDevs:
         question = json.loads(requests.get(self.urlQuestion).text)
         print(question)
         return question
+    def getnewquestion(self):
+        self.question =self.getquestion()
+        return self.question
     def sendQuestion(self, question):
         sendQuestion=requests.post(self.urlQuestion, data={'question':question})
         print(sendQuestion.text)
