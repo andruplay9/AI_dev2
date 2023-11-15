@@ -1,4 +1,3 @@
-
 import openai as OpenAIAPI
 import pandas as pd
 import whisper
@@ -9,6 +8,10 @@ import numpy as np
 import pickle
 from io import StringIO
 import tiktoken
+import json
+
+from langchain.schema import BaseOutputParser
+
 
 class EmbendingsHandle:
     model="text-embedding-ada-002"
@@ -71,3 +74,18 @@ class EmbendingsHandle:
         labels, distances = self.vectorTable.knn_query(response[0], k = searchDepth)
         print(f'{labels} {distances}')
         return labels, distances
+
+class CommaSeparatedListOutputParser(BaseOutputParser):
+    """Parse the output of an LLM call to a comma-separated list."""
+
+    def parse(self, text: str):
+        """Parse the output of an LLM call."""
+        return text.strip().split(", ")
+
+def process_function_calling(response_message, available_functions):
+    for tool_call in response_message:
+        function_name = tool_call.function.name
+        function_to_call = available_functions[function_name]
+        function_args = json.loads(tool_call.function.arguments)
+        print(f'{function_name} {function_to_call} {function_args}')
+        function_to_call(function_args)

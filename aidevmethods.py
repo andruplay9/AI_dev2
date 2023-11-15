@@ -1,9 +1,6 @@
 import requests
 import json
 
-from langchain.schema import BaseOutputParser
-
-
 class ConnectionToAiDevs:
     url = 'https://zadania.aidevs.pl/token/'
     urlQuestionBegin = 'https://zadania.aidevs.pl/task/'
@@ -38,7 +35,7 @@ class ConnectionToAiDevs:
 
     def sendresult(self, answer):
         sendResult = requests.post(self.urlAnswer, json=answer)
-        print(sendResult.text)
+        print(f'{answer} {sendResult.text}')
 
     def sendresultasjson(self, text):
         answer = {'answer': text}
