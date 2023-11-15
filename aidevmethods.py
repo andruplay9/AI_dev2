@@ -1,6 +1,8 @@
 import requests
 import json
 
+from langchain.schema import BaseOutputParser
+
 
 class ConnectionToAiDevs:
     url = 'https://zadania.aidevs.pl/token/'
@@ -41,3 +43,4 @@ class ConnectionToAiDevs:
     def sendresultasjson(self, text):
         answer = {'answer': text}
         self.sendresult(answer)
+
